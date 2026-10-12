@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Healthy Together Initiative</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: green;
+      color: #222;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    .top {
+      min-height: 110px;
+      background: green;
+      position: relative;
+      padding: 20px 25px;
+    }
+
+    /* LOGO */
+
+    .logo {
+      position: absolute;
+      top: 15px;
+      left: 25px;
+      width: 75px;
+      height: 75px;
+      border-radius: 50%;
+      background: white;
+      padding: 5px;
+      object-fit: contain;
+    }
+
+    /* MENU BUTTON */
+
+    .menu {
+      position: absolute;
+      top: 25px;
+      right: 25px;
+      background: white;
+      color: green;
+      border: none;
+      padding: 14px 25px;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .menu:hover {
+      background: #eeeeee;
+    }
+
+    /* MENU BOX */
+
+    .menu-box {
+      display: none;
+      position: absolute;
+      top: 80px;
+      right: 25px;
+      width: 220px;
+      background: white;
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+      z-index: 1000;
+    }
+
+    .menu-box button {
+      width: 100%;
+      padding: 14px;
+      margin: 4px 0;
+      border: none;
+      background: white;
+      color: green;
+      text-align: left;
+      font-size: 17px;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .menu-box button:hover {
+      background: #eeeeee;
+    }
+
+    /* =========================
+       HOME
+    ========================= */
+
+    .middle {
+      min-height: 70vh;
+      background: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 50px 25px;
+    }
+
+    h1 {
+      color: green;
+      font-size: 45px;
+      line-height: 1.2;
+      margin-bottom: 25px;
+    }
+
+    .tagline {
+      color: #555;
+      font-size: 20px;
+      margin-bottom: 35px;
+    }
+
+    /* EXPLORE BUTTON */
+
+    .explore {
+      background: green;
+      color: white;
+      border: none;
+      padding: 18px 45px;
+      border-radius: 10px;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .explore:hover {
+      background: #006400;
+    }
+
+    /* =========================
+       COMMUNITY OUTREACH
+    ========================= */
+
+    .outreach {
+      background: #f7fff7;
+      padding: 50px 25px;
+      text-align: center;
+    }
+
+    .outreach h2 {
+      color: green;
+      font-size: 32px;
+      margin-bottom: 15px;
+    }
+
+    .outreach-text {
+      max-width: 800px;
+      margin: 0 auto 30px;
+      line-height: 1.7;
+      font-size: 17px;
+    }
+
+    /* PHOTO GRID */
+
+    .photo-grid {
+      max-width: 1100px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
+    }
+
+    .photo-grid img {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+    }
+
+    .photo-grid img:hover {
+      transform: scale(1.02);
+    }
+
+    /* =========================
+       INFORMATION SECTIONS
+    ========================= */
+
+    .info {
+      display: none;
+      background: white;
+      padding: 45px 25px;
+      line-height: 1.7;
+    }
+
+    .info h2 {
+      color: green;
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    .info h3 {
+      color: green;
+      margin-top: 25px;
+      margin-bottom: 8px;
+    }
+
+    .info p {
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+
+    .info ul {
+      margin-left: 25px;
+      margin-bottom: 15px;
+    }
+
+    .info li {
+      margin-bottom: 10px;
+    }
+
+    /* =========================
+       CLOSE BUTTON
+    ========================= */
+
+    .close-btn {
+      background: green;
+      color: white;
+      border: none;
+      padding: 12px 22px;
+      border-radius: 7px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .close-btn:hover {
+      background: #006400;
+    }
+
+    /* =========================
+       LIGHTBOX
+    ========================= */
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .lightbox img {
+      max-width: 95%;
+      max-height: 90%;
+      border-radius: 10px;
+      object-fit: contain;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 15px;
+      right: 25px;
+      color: white;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* =========================
+       BOTTOM
+    ========================= */
+
+    .bottom {
+      min-height: 100px;
+      background: green;
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 600px) {
+
+      .logo {
+        width: 65px;
+        height: 65px;
+        left: 18px;
+      }
+
+      .menu {
+        right: 18px;
+        top: 22px;
+        font-size: 16px;
+        padding: 12px 20px;
+      }
+
+      .menu-box {
+        right: 18px;
+        top: 75px;
+      }
+
+      h1 {
+        font-size: 36px;
+      }
+
+      .tagline {
+        font-size: 18px;
+      }
+
+      .explore {
+        font-size: 22px;
+        padding: 16px 38px;
+      }
+
+      .outreach h2 {
+        font-size: 28px;
+      }
+
+      .photo-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+      .photo-grid img {
+        height: 170px;
+      }
+
+      .info {
+        padding: 30px 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       HEADER
+  ========================= -->
+
+  <section class="top">
+
+    <!-- LOGO -->
+    <img
+      class="logo"
+      src="IMG-20260924-WA0133.jpg"
+      alt="Healthy Together Initiative Logo"
+    >
+
+    <!-- MENU BUTTON -->
+    <button class="menu" onclick="openMenu()">
+      MENU
+    </button>
+
+    <!-- MENU OPTIONS -->
+    <div class="menu-box" id="menuBox">
+
+      <button onclick="showHome()">
+        Home
+      </button>
+
+      <button onclick="showAbout()">
+        About Us
+      </button>
+
+      <button onclick="showContact()">
+        Contact Us
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       HOME
+  ========================= -->
+
+  <main class="middle" id="home">
+
+    <h1>
+      Welcome to<br>
+      Healthy Together Initiative
+    </h1>
+
+    <p class="tagline">
+      Advancing health, Empowering communities.
+    </p>
+
+    <button class="explore" onclick="scrollToOutreach()">
+      EXPLORE
+    </button>
+
+  </main>
+
+
+  <!-- =========================
+       COMMUNITY OUTREACH
+  ========================= -->
+
+  <section class="outreach" id="outreach">
+
+    <h2>Community Outreach</h2>
+
+    <p class="outreach-text">
+      Healthy Together Initiative works with communities and healthcare
+      workers to promote public health awareness, disease prevention,
+      healthcare education, and safer clinical environments.
+    </p>
+
+    <div class="photo-grid">
+
+      <img src="IMG-20260924-WA0086.jpg" alt="Community Outreach" onclick="openLightbox(this.src)">
+      <img src="IMG-20260924-WA0087.jpg" alt="Community Outreach" onclick="openLightbox(this.src)">
+      <img src="IMG-20260924-WA0090.jpg" alt="Community Outreach" onclick="openLightbox(this.src)">
+      <img src="IMG-20260924-WA0092.jpg" alt="Community Outreach" onclick="openLightbox(this.src)">
+      <img src="IMG-20260924-WA0095.jpg" alt="Community Outreach" onclick="openLightbox(this.src)">
+      <img src="IMG-20260924-WA0093.jpg" alt="Community Outreach" onclick="openLightbox(this.src)">
+      <img src="IMG-20260924-WA0098.jpg" alt="Community Outreach" onclick="openLightbox(this.src)">
+      <img src="IMG-20260924-WA0097.jpg" alt="Community Outreach" onclick="openLightbox(this.src)">
+      <img src="IMG-20260924-WA0096.jpg" alt="Community Outreach" onclick="openLightbox(this.src)">
+      <img src="IMG-20260924-WA0100.jpg" alt="Community Outreach" onclick="openLightbox(this.src)">
+      <img src="IMG-20260924-WA0099.jpg" alt="Community Outreach" onclick="openLightbox(this.src)">
+      <img src="IMG-20260924-WA0101.jpg" alt="Community Outreach" onclick="openLightbox(this.src)">
+      <img src="IMG-20260924-WA0105.jpg" alt="Community Outreach" onclick="openLightbox(this.src)">
+      <img src="IMG-20260924-WA0103.jpg" alt="Community Outreach" onclick="openLightbox(this.src)">
+      <img src="IMG-20260924-WA0102.jpg" alt="Community Outreach" onclick="openLightbox(this.src)">
+      <img src="IMG-20260924-WA0109.jpg" alt="Community Outreach" onclick="openLightbox(this.src)">
+      <img src="IMG-20260924-WA0108.jpg" alt="Community Outreach" onclick="openLightbox(this.src)">
+      <img src="IMG-20260924-WA0107.jpg" alt="Community Outreach" onclick="openLightbox(this.src)">
+      <img src="IMG-20260924-WA0112.jpg" alt="Community Outreach" onclick="openLightbox(this.src)">
+      <img src="IMG-20260924-WA0111.jpg" alt="Community Outreach" onclick="openLightbox(this.src)">
+      <img src="IMG-20260924-WA0110.jpg" alt="Community Outreach" onclick="openLightbox(this.src)">
+      <img src="IMG-20260924-WA0118.jpg" alt="Community Outreach" onclick="openLightbox(this.src)">
+      <img src="IMG-20260924-WA0117.jpg" alt="Community Outreach" onclick="openLightbox(this.src)">
+      <img src="IMG-20260924-WA0114.jpg" alt="Community Outreach" onclick="openLightbox(this.src)">
+      <img src="IMG-20260924-WA0133.jpg" alt="Healthy Together Initiative" onclick="openLightbox(this.src)">
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       ABOUT US
+  ========================= -->
+
+  <section class="info" id="about">
+
+    <h2>About Us</h2>
+
+    <p>
+      Healthy Together Initiative is a non-governmental organization
+      focused on public health awareness, disease prevention, and
+      capacity-building for healthcare workers.
+    </p>
+
+    <h3>Core Mission & Vision</h3>
+
+    <p>
+      <strong>Promoting Healthcare Capacity:</strong>
+      Focuses on strengthening primary and secondary healthcare delivery
+      through continuous education, sensitization, and training workshops
+      for clinical staff.
+    </p>
+
+    <p>
+      <strong>Community & Hospital Safety:</strong>
+      Aims to reduce preventable healthcare-associated illnesses and foster
+      safer clinical environments for both patients and healthcare providers.
+    </p>
+
+    <h3>Key Programs & Training Focus Areas</h3>
+
+    <p>
+      <strong>Hospital-Acquired Infection (HAI) Prevention:</strong>
+      Conducts specialized training sessions, such as the One Day
+      Sensitization Training for Nurses on Nosocomial Infections in Hospitals.
+    </p>
+
+    <p>
+      <strong>Nosocomial Infection Control:</strong>
+      Educates medical staff on:
+    </p>
+
+    <ul>
+
+      <li>
+        <strong>Sources & Transmission:</strong>
+        Identifying vectors, cross-contamination risks, and environmental
+        reservoirs of pathogens within hospital wards.
+      </li>
+
+      <li>
+        <strong>Prevention & Control Strategies:</strong>
+        Teaching standard precautions, hand hygiene protocols, sterilization
+        techniques, and effective barrier nursing practices.
+      </li>
+
+      <li>
+        <strong>Clinical Causes & Pathways:</strong>
+        Addressing specific causes of infections linked to invasive devices,
+        surgical procedures, and prolonged hospitalization.
+      </li>
+
+    </ul>
+
+    <h3>Organizational Highlights</h3>
+
+    <p>
+      <strong>Interactive Field Workshops:</strong>
+      Employs visual learning materials, instructional banners, and
+      structured modules to engage healthcare workers directly in
+      clinical settings.
+    </p>
+
+    <p>
+      <strong>Interprofessional Collaboration:</strong>
+      Coordinates with local health facilities, nursing staff, and public
+      health practitioners to build sustainable infection-control routines.
+    </p>
+
+    <button class="close-btn" onclick="goHome()">
+      Back to Home
+    </button>
+
+  </section>
+
+
+  <!-- =========================
+       CONTACT US
+  ========================= -->
+
+  <section class="info" id="contact">
+
+    <h2>Contact Us</h2>
+
+    <h3>HEALTHY TOGETHER INITIATIVE</h3>
+
+    <p>
+      <strong>
+        Advancing Health. Empowering Communities.
+        Preserving the Future.
+      </strong>
+    </p>
+
+    <p>
+      Registered Incorporated Trustees (RC: 7699662)
+    </p>
+
+    <h3>Who We Are</h3>
+
+    <p>
+      Healthy Together Initiative is a non-profit, non-political
+      organization committed to creating equitable, accessible healthcare
+      systems and social support networks for underserved populations.
+    </p>
+
+    <h3>Our Address</h3>
+
+    <p>
+      House No. C3A, Valley View Estate,<br>
+      Apo Dutse, FCT, Nigeria
+    </p>
+
+    <h3>Our Core Pillars</h3>
+
+    <p>
+      <strong>Public Health & AMR Outreach:</strong>
+      Monitoring antimicrobial resistance and educating local populations
+      to combat the threat of antibiotic-resistant pathogens.
+    </p>
+
+    <p>
+      <strong>Community Infectious Disease Prevention:</strong>
+      Executing field-level awareness programs to halt the spread of
+      infectious illnesses.
+    </p>
+
+    <p>
+      <strong>Youth & Adolescent Health Services:</strong>
+      Designing specialized, accessible programs to meet the unique
+      healthcare needs of adolescents.
+    </p>
+
+    <p>
+      <strong>Food Security Initiatives:</strong>
+      Building community-level food networks to combat hunger and improve
+      local nutrition.
+    </p>
+
+    <h3>Partner With Us</h3>
+
+    <p>
+      We collaborate with government agencies, international donors,
+      research institutions, and local stakeholders to implement
+      high-impact public health solutions.
+    </p>
+
+    <button class="close-btn" onclick="goHome()">
+      Back to Home
+    </button>
+
+  </section>
+
+
+  <!-- =========================
+       LIGHTBOX
+  ========================= -->
+
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+
+    <span class="lightbox-close">
+      &times;
+    </span>
+
+    <img id="lightboxImage" src="" alt="Enlarged photo">
+
+  </div>
+
+
+  <!-- =========================
+       BOTTOM
+  ========================= -->
+
+  <section class="bottom"></section>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================= -->
+
+  <script>
+
+    /* OPEN / CLOSE MENU */
+
+    function openMenu() {
+
+      const menu = document.getElementById("menuBox");
+
+      if (menu.style.display === "block") {
+
+        menu.style.display = "none";
+
+      } else {
+
+        menu.style.display = "block";
+
+      }
+
+    }
+
+
+    /* HIDE ALL SECTIONS */
+
+    function hideAll() {
+
+      document.getElementById("home").style.display = "none";
+
+      document.getElementById("outreach").style.display = "none";
+
+      document.getElementById("about").style.display = "none";
+
+      document.getElementById("contact").style.display = "none";
+
+      document.getElementById("menuBox").style.display = "none";
+
+    }
+
+
+    /* SHOW HOME */
+
+    function showHome() {
+
+      hideAll();
+
+      document.getElementById("home").style.display = "flex";
+
+      document.getElementById("outreach").style.display = "block";
+
+      window.scrollTo(0, 0);
+
+    }
+
+
+    /* SHOW ABOUT */
+
+    function showAbout() {
+
+      hideAll();
+
+      document.getElementById("about").style.display = "block";
+
+      window.scrollTo(0, 0);
+
+    }
+
+
+    /* SHOW CONTACT */
+
+    function showContact() {
+
+      hideAll();
+
+      document.getElementById("contact").style.display = "block";
+
+      window.scrollTo(0, 0);
+
+    }
+
+
+    /* BACK TO HOME */
+
+    function goHome() {
+
+      document.getElementById("about").style.display = "none";
+
+      document.getElementById("contact").style.display = "none";
+
+      document.getElementById("home").style.display = "flex";
+
+      document.getElementById("outreach").style.display = "block";
+
+      window.scrollTo(0, 0);
+
+    }
+
+
+    /* EXPLORE BUTTON */
+
+    function scrollToOutreach() {
+
+      document.getElementById("outreach").scrollIntoView({
+        behavior: "smooth"
+      });
+
+    }
+
+
+    /* OPEN PHOTO */
+
+    function openLightbox(imageSrc) {
+
+      const lightbox = document.getElementById("lightbox");
+
+      const lightboxImage = document.getElementById("lightboxImage");
+
+      lightboxImage.src = imageSrc;
+
+      lightbox.style.display = "flex";
+
+    }
+
+
+    /* CLOSE PHOTO */
+
+    function closeLightbox() {
+
+      document.getElementById("lightbox").style.display = "none";
+
+    }
+
+
+    /* ESC KEY CLOSES PHOTO */
+
+    document.addEventListener("keydown", function(event) {
+
+      if (event.key === "Escape") {
+
+        closeLightbox();
+
+      }
+
+    });
+
+  </script>
+
+</body>
+</html>
